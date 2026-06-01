@@ -8,28 +8,36 @@ import {
 } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
 import { useCartStore } from '@/store/cartStore';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { cn } from '@/lib/utils';
 
-const CATEGORIES = [
-  { label: 'Концерты', slug: 'concerts', icon: Music,   color: '#8B5CF6' },
-  { label: 'Театр',    slug: 'theatre',  icon: Theater,  color: '#EC4899' },
-  { label: 'Спорт',    slug: 'sport',    icon: Trophy,   color: '#10B981' },
-  { label: 'Стендап',  slug: 'standup',  icon: Mic2,     color: '#F59E0B' },
-  { label: 'Выставки', slug: 'exhibition',icon: Image,   color: '#06B6D4' },
-  { label: 'Кино',     slug: 'cinema',   icon: Film,     color: '#EF4444' },
-];
+const CATEGORY_ICONS = {
+  concerts: Music,
+  theatre: Theater,
+  sport: Trophy,
+  standup: Mic2,
+  exhibition: Image,
+  cinema: Film,
+};
+const CATEGORY_COLORS = {
+  concerts: '#8B5CF6', theatre: '#EC4899', sport: '#10B981',
+  standup: '#F59E0B', exhibition: '#06B6D4', cinema: '#EF4444',
+};
+const CATEGORY_SLUGS = ['concerts', 'theatre', 'sport', 'standup', 'exhibition', 'cinema'];
 
 export default function Navbar() {
-  const [scrolled, setScrolled]       = useState(false);
-  const [mobileOpen, setMobileOpen]   = useState(false);
-  const [userMenu, setUserMenu]       = useState(false);
-  const [catMenu, setCatMenu]         = useState(false);
-  const [searchOpen, setSearchOpen]   = useState(false);
-  const [searchQ, setSearchQ]         = useState('');
+  const [scrolled, setScrolled]     = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [userMenu, setUserMenu]     = useState(false);
+  const [catMenu, setCatMenu]       = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQ, setSearchQ]       = useState('');
   const { isAuthenticated, user, logout } = useAuthStore();
   const { items } = useCartStore();
-  const navigate  = useNavigate();
-  const location  = useLocation();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const searchRef = useRef(null);
 
   useEffect(() => {
@@ -39,15 +47,22 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => { setMobileOpen(false); setCatMenu(false); setUserMenu(false); }, [location]);
-
-  useEffect(() => {
-    if (searchOpen) setTimeout(() => searchRef.current?.focus(), 100);
-  }, [searchOpen]);
+  useEffect(() => { if (searchOpen) setTimeout(() => searchRef.current?.focus(), 100); }, [searchOpen]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQ.trim()) { navigate(`/events?search=${encodeURIComponent(searchQ.trim())}`); setSearchOpen(false); setSearchQ(''); }
+    if (searchQ.trim()) {
+      navigate(`/events?search=${encodeURIComponent(searchQ.trim())}`);
+      setSearchOpen(false); setSearchQ('');
+    }
   };
+
+  const userMenuItems = [
+    { to: '/profile',   icon: User,          key: 'nav.profile' },
+    { to: '/orders',    icon: Ticket,        key: 'nav.myTickets' },
+    { to: '/favorites', icon: Heart,         key: 'nav.favorites' },
+    ...(user?.role === 'ADMIN' ? [{ to: '/admin', icon: LayoutDashboard, key: 'nav.adminPanel' }] : []),
+  ];
 
   return (
     <>
@@ -69,45 +84,50 @@ export default function Navbar() {
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-1">
             <Link to="/events" className={cn('btn-ghost text-sm px-4', location.pathname === '/events' && 'text-brand-400')}>
-              Афиша
+              {t('nav.poster')}
             </Link>
 
-            {/* Categories dropdown */}
             <div className="relative" onMouseEnter={() => setCatMenu(true)} onMouseLeave={() => setCatMenu(false)}>
               <button className={cn('btn-ghost text-sm px-4 flex items-center gap-1', catMenu && 'text-brand-400')}>
-                Категории <ChevronDown className={cn('w-3.5 h-3.5 transition-transform duration-200', catMenu && 'rotate-180')} />
+                {t('nav.categories')} <ChevronDown className={cn('w-3.5 h-3.5 transition-transform duration-200', catMenu && 'rotate-180')} />
               </button>
               <AnimatePresence>
                 {catMenu && (
                   <motion.div initial={{ opacity: 0, y: 8, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }} transition={{ duration: 0.15 }}
                     className="absolute top-full left-0 mt-1 w-64 glass-dark rounded-2xl border border-white/10 shadow-glass overflow-hidden p-2">
-                    {CATEGORIES.map(cat => (
-                      <Link key={cat.slug} to={`/events?category=${cat.slug}`}
-                        className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-colors group/cat">
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                          style={{ background: `${cat.color}20` }}>
-                          <cat.icon className="w-4 h-4" style={{ color: cat.color }} />
-                        </div>
-                        <span className="text-sm text-white/70 group-hover/cat:text-white transition-colors">{cat.label}</span>
-                      </Link>
-                    ))}
+                    {CATEGORY_SLUGS.map(slug => {
+                      const Icon = CATEGORY_ICONS[slug];
+                      const color = CATEGORY_COLORS[slug];
+                      return (
+                        <Link key={slug} to={`/events?category=${slug}`}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-colors group/cat">
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${color}20` }}>
+                            <Icon className="w-4 h-4" style={{ color }} />
+                          </div>
+                          <span className="text-sm text-white/70 group-hover/cat:text-white transition-colors">
+                            {t(`nav.categories_list.${slug}`)}
+                          </span>
+                        </Link>
+                      );
+                    })}
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
             <Link to="/events?hot=true" className="btn-ghost text-sm px-4 flex items-center gap-1.5 text-orange-400 hover:text-orange-300">
-              <Flame className="w-3.5 h-3.5" /> Горячие
+              <Flame className="w-3.5 h-3.5" /> {t('nav.hot')}
             </Link>
             <Link to="/events?featured=true" className="btn-ghost text-sm px-4 flex items-center gap-1.5 text-brand-400 hover:text-brand-300">
-              <Star className="w-3.5 h-3.5" /> Топ
+              <Star className="w-3.5 h-3.5" /> {t('nav.top')}
             </Link>
           </nav>
 
           {/* Right actions */}
           <div className="flex items-center gap-1.5">
-            {/* Search */}
+            <LanguageSwitcher />
+
             <AnimatePresence mode="wait">
               {searchOpen ? (
                 <motion.form key="form" initial={{ width: 40, opacity: 0 }} animate={{ width: 220, opacity: 1 }}
@@ -115,7 +135,7 @@ export default function Navbar() {
                   onSubmit={handleSearch} className="flex items-center gap-2 glass rounded-xl px-3 py-2 border border-brand-500/40">
                   <Search className="w-4 h-4 text-white/40 flex-shrink-0" />
                   <input ref={searchRef} value={searchQ} onChange={e => setSearchQ(e.target.value)}
-                    placeholder="Поиск..." className="bg-transparent text-sm text-white placeholder-white/30 outline-none w-full" />
+                    placeholder={t('nav.search')} className="bg-transparent text-sm text-white placeholder-white/30 outline-none w-full" />
                   <button type="button" onClick={() => { setSearchOpen(false); setSearchQ(''); }}>
                     <X className="w-4 h-4 text-white/40 hover:text-white transition-colors" />
                   </button>
@@ -145,7 +165,6 @@ export default function Navbar() {
               </>
             )}
 
-            {/* User menu */}
             {isAuthenticated ? (
               <div className="relative">
                 <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
@@ -168,21 +187,16 @@ export default function Navbar() {
                         <p className="font-semibold text-sm">{user?.name}</p>
                         <p className="text-xs text-white/40 truncate">{user?.email}</p>
                       </div>
-                      {[
-                        { to: '/profile',  icon: User,          label: 'Профиль' },
-                        { to: '/orders',   icon: Ticket,        label: 'Мои билеты' },
-                        { to: '/favorites',icon: Heart,         label: 'Избранное' },
-                        ...(user?.role === 'ADMIN' ? [{ to: '/admin', icon: LayoutDashboard, label: 'Админ панель' }] : []),
-                      ].map(item => (
+                      {userMenuItems.map(item => (
                         <Link key={item.to} to={item.to} onClick={() => setUserMenu(false)}
                           className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-white/5 transition-colors">
                           <item.icon className="w-4 h-4 text-brand-400" />
-                          {item.label}
+                          {t(item.key)}
                         </Link>
                       ))}
                       <button onClick={() => { logout(); setUserMenu(false); }}
                         className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-400 hover:bg-red-400/10 transition-colors border-t border-white/10">
-                        <LogOut className="w-4 h-4" /> Выйти
+                        <LogOut className="w-4 h-4" /> {t('nav.logout')}
                       </button>
                     </motion.div>
                   )}
@@ -190,17 +204,16 @@ export default function Navbar() {
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <Link to="/login" className="btn-ghost text-sm px-4 py-2 hidden sm:block">Войти</Link>
+                <Link to="/login" className="btn-ghost text-sm px-4 py-2 hidden sm:block">{t('nav.login')}</Link>
                 <Link to="/register">
                   <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
                     className="btn-primary text-sm py-2 px-4 rounded-xl">
-                    Регистрация
+                    {t('nav.register')}
                   </motion.div>
                 </Link>
               </div>
             )}
 
-            {/* Mobile burger */}
             <button onClick={() => setMobileOpen(v => !v)} className="btn-ghost p-2.5 rounded-xl lg:hidden">
               <AnimatePresence mode="wait">
                 {mobileOpen
@@ -219,27 +232,32 @@ export default function Navbar() {
               exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.25 }}
               className="lg:hidden glass-dark border-t border-white/10 overflow-hidden">
               <div className="px-4 py-4 space-y-1">
-                <Link to="/events" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-sm font-medium">Афиша</Link>
-                {CATEGORIES.map(cat => (
-                  <Link key={cat.slug} to={`/events?category=${cat.slug}`}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-sm">
-                    <cat.icon className="w-4 h-4" style={{ color: cat.color }} />
-                    {cat.label}
-                  </Link>
-                ))}
-                {!isAuthenticated && (
+                <Link to="/events" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-sm font-medium">
+                  {t('nav.poster')}
+                </Link>
+                {CATEGORY_SLUGS.map(slug => {
+                  const Icon = CATEGORY_ICONS[slug];
+                  const color = CATEGORY_COLORS[slug];
+                  return (
+                    <Link key={slug} to={`/events?category=${slug}`}
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-sm">
+                      <Icon className="w-4 h-4" style={{ color }} />
+                      {t(`nav.categories_list.${slug}`)}
+                    </Link>
+                  );
+                })}
+                {!isAuthenticated ? (
                   <div className="flex gap-2 pt-3 border-t border-white/10">
-                    <Link to="/login" className="btn-secondary flex-1 text-center text-sm py-2.5">Войти</Link>
-                    <Link to="/register" className="btn-primary flex-1 text-center text-sm py-2.5">Регистрация</Link>
+                    <Link to="/login" className="btn-secondary flex-1 text-center text-sm py-2.5">{t('nav.login')}</Link>
+                    <Link to="/register" className="btn-primary flex-1 text-center text-sm py-2.5">{t('nav.register')}</Link>
                   </div>
-                )}
-                {isAuthenticated && (
+                ) : (
                   <div className="pt-3 border-t border-white/10 space-y-1">
-                    <Link to="/profile"   className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-sm"><User className="w-4 h-4 text-brand-400" /> Профиль</Link>
-                    <Link to="/orders"    className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-sm"><Ticket className="w-4 h-4 text-brand-400" /> Мои билеты</Link>
-                    <Link to="/favorites" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-sm"><Heart className="w-4 h-4 text-brand-400" /> Избранное</Link>
+                    <Link to="/profile"   className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-sm"><User className="w-4 h-4 text-brand-400" /> {t('nav.profile')}</Link>
+                    <Link to="/orders"    className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-sm"><Ticket className="w-4 h-4 text-brand-400" /> {t('nav.myTickets')}</Link>
+                    <Link to="/favorites" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-sm"><Heart className="w-4 h-4 text-brand-400" /> {t('nav.favorites')}</Link>
                     <button onClick={logout} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-400/10 text-sm">
-                      <LogOut className="w-4 h-4" /> Выйти
+                      <LogOut className="w-4 h-4" /> {t('nav.logout')}
                     </button>
                   </div>
                 )}
@@ -249,7 +267,6 @@ export default function Navbar() {
         </AnimatePresence>
       </motion.header>
 
-      {/* Search overlay */}
       <AnimatePresence>
         {searchOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}

@@ -1,19 +1,22 @@
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, Calendar, Users, ShoppingBag, LogOut, Ticket, ChevronRight } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { cn } from '@/lib/utils';
-
-const navItems = [
-  { to: '/admin', icon: LayoutDashboard, label: 'Дашборд', exact: true },
-  { to: '/admin/events', icon: Calendar, label: 'Мероприятия' },
-  { to: '/admin/users', icon: Users, label: 'Пользователи' },
-  { to: '/admin/orders', icon: ShoppingBag, label: 'Заказы' },
-];
 
 export default function AdminLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
+  const { t } = useTranslation();
+
+  const navItems = [
+    { to: '/admin',         icon: LayoutDashboard, key: 'admin.nav.dashboard', exact: true },
+    { to: '/admin/events',  icon: Calendar,        key: 'admin.nav.events' },
+    { to: '/admin/users',   icon: Users,           key: 'admin.nav.users' },
+    { to: '/admin/orders',  icon: ShoppingBag,     key: 'admin.nav.orders' },
+  ];
 
   return (
     <div className="min-h-screen flex">
@@ -38,38 +41,39 @@ export default function AdminLayout() {
               <Link key={item.to} to={item.to}
                 className={cn(
                   'flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all',
-                  active
-                    ? 'bg-brand-500/20 text-brand-400 border border-brand-500/30'
-                    : 'text-white/50 hover:text-white hover:bg-white/5'
-                )}
-              >
+                  active ? 'bg-brand-500/20 text-brand-400 border border-brand-500/30' : 'text-white/50 hover:text-white hover:bg-white/5'
+                )}>
                 <item.icon className="w-4 h-4" />
-                {item.label}
+                {t(item.key)}
                 {active && <ChevronRight className="w-3 h-3 ml-auto" />}
               </Link>
             );
           })}
         </nav>
 
-        <div className="p-4 border-t border-white/5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-neon-pink flex items-center justify-center text-xs font-bold">
-              {user?.name?.[0]}
+        <div className="p-4 border-t border-white/5 space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-neon-pink flex items-center justify-center text-xs font-bold">
+                {user?.name?.[0]}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium truncate">{user?.name}</p>
+                <p className="text-xs text-white/30">Administrator</p>
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium truncate">{user?.name}</p>
-              <p className="text-xs text-white/30">Administrator</p>
-            </div>
+            <LanguageSwitcher />
           </div>
+          <Link to="/" className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/5 transition-colors">
+            ← {t('admin.nav.backToSite')}
+          </Link>
           <button onClick={() => { logout(); navigate('/'); }}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-red-400 hover:bg-red-400/10 transition-colors"
-          >
-            <LogOut className="w-4 h-4" /> Выйти
+            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-red-400 hover:bg-red-400/10 transition-colors">
+            <LogOut className="w-4 h-4" /> {t('nav.logout')}
           </button>
         </div>
       </aside>
 
-      {/* Main content */}
       <main className="flex-1 ml-64 min-h-screen">
         <Outlet />
       </main>

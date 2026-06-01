@@ -1,54 +1,54 @@
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
 import { Users, Ticket, Calendar, Star, TrendingUp, Shield } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 function CountUp({ to, suffix = '' }) {
   const [val, setVal] = useState(0);
   const ref = useRef(false);
-
   return (
-    <motion.span
-      onViewportEnter={() => {
-        if (ref.current) return;
-        ref.current = true;
-        const num = parseInt(to.replace(/\D/g, ''));
-        let start = 0;
-        const step = num / 60;
-        const id = setInterval(() => {
-          start += step;
-          if (start >= num) { setVal(num); clearInterval(id); }
-          else setVal(Math.floor(start));
-        }, 16);
-      }}
-    >
+    <motion.span onViewportEnter={() => {
+      if (ref.current) return;
+      ref.current = true;
+      const num = parseInt(to.replace(/\D/g, ''));
+      let start = 0;
+      const step = num / 60;
+      const id = setInterval(() => {
+        start += step;
+        if (start >= num) { setVal(num); clearInterval(id); }
+        else setVal(Math.floor(start));
+      }, 16);
+    }}>
       {val.toLocaleString()}{suffix}
     </motion.span>
   );
 }
 
-const STATS = [
-  { icon: Ticket,    value: '500000', suffix: '+', label: 'Билетов продано',    color: '#8B5CF6', bg: 'from-violet-500/20 to-violet-500/5' },
-  { icon: Calendar,  value: '1200',   suffix: '+', label: 'Событий в год',      color: '#EC4899', bg: 'from-pink-500/20 to-pink-500/5' },
-  { icon: Users,     value: '150000', suffix: '+', label: 'Довольных клиентов', color: '#06B6D4', bg: 'from-cyan-500/20 to-cyan-500/5' },
-  { icon: Star,      value: '4',      suffix: '.9★',label: 'Средний рейтинг',  color: '#F59E0B', bg: 'from-amber-500/20 to-amber-500/5' },
-  { icon: TrendingUp,value: '98',     suffix: '%', label: 'Довольны покупкой', color: '#10B981', bg: 'from-emerald-500/20 to-emerald-500/5' },
-  { icon: Shield,    value: '100',    suffix: '%', label: 'Безопасных сделок', color: '#EF4444', bg: 'from-red-500/20 to-red-500/5' },
-];
-
 export default function StatsSection() {
+  const { t } = useTranslation();
+
+  const STATS = [
+    { icon: Ticket,     value: '500000', suffix: '+', labelKey: 'home.stats.tickets',  color: '#8B5CF6', bg: 'from-violet-500/20 to-violet-500/5' },
+    { icon: Calendar,   value: '1200',   suffix: '+', labelKey: 'home.stats.events',   color: '#EC4899', bg: 'from-pink-500/20 to-pink-500/5' },
+    { icon: Users,      value: '150000', suffix: '+', labelKey: 'home.stats.users',    color: '#06B6D4', bg: 'from-cyan-500/20 to-cyan-500/5' },
+    { icon: Star,       value: '4',      suffix: '.9★',labelKey: 'home.hero.stats.rating', color: '#F59E0B', bg: 'from-amber-500/20 to-amber-500/5' },
+    { icon: TrendingUp, value: '98',     suffix: '%', labelKey: 'home.stats.tickets',  color: '#10B981', bg: 'from-emerald-500/20 to-emerald-500/5' },
+    { icon: Shield,     value: '100',    suffix: '%', labelKey: 'home.stats.tickets',  color: '#EF4444', bg: 'from-red-500/20 to-red-500/5' },
+  ];
+
   return (
     <section className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-brand-900/10 via-transparent to-neon-pink/5" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} className="text-center mb-12">
-          <h2 className="section-title mb-3">TicketHub <span className="text-gradient">в цифрах</span></h2>
-          <p className="text-white/40">Нам доверяют сотни тысяч покупателей по всему Казахстану</p>
+          <h2 className="section-title mb-3">
+            {t('home.stats.title')}
+          </h2>
         </motion.div>
-
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {STATS.map((s, i) => (
-            <motion.div key={s.label}
+            <motion.div key={i}
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.08 }}
               whileHover={{ y: -4 }}
@@ -63,7 +63,7 @@ export default function StatsSection() {
                 <p className="text-2xl font-display font-black mb-1" style={{ color: s.color }}>
                   <CountUp to={s.value} suffix={s.suffix} />
                 </p>
-                <p className="text-white/40 text-xs leading-tight">{s.label}</p>
+                <p className="text-white/40 text-xs leading-tight">{t(s.labelKey)}</p>
               </div>
             </motion.div>
           ))}

@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Flame, ArrowRight, Clock, MapPin } from 'lucide-react';
 import { useEvents } from '@/hooks/useEvents';
 import { formatDate, formatPrice } from '@/lib/utils';
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function HotCard({ event, index }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const soldPct = event.totalSeats > 0 ? Math.round((event.soldSeats / event.totalSeats) * 100) : 0;
 
   return (
@@ -24,7 +25,6 @@ function HotCard({ event, index }) {
           </span>
         </div>
       </div>
-
       <div className="flex-1 min-w-0">
         <h3 className="font-bold text-sm leading-tight mb-1 group-hover:text-brand-400 transition-colors line-clamp-2">
           {event.title}
@@ -33,8 +33,6 @@ function HotCard({ event, index }) {
           <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{formatDate(event.startDate, 'd MMM')}</span>
           <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{event.venue?.city}</span>
         </div>
-
-        {/* Sold progress */}
         <div className="flex items-center gap-2">
           <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
             <motion.div className="h-full rounded-full bg-gradient-to-r from-red-500 to-orange-400"
@@ -44,10 +42,9 @@ function HotCard({ event, index }) {
           <span className="text-xs text-red-400 font-semibold whitespace-nowrap">{soldPct}%</span>
         </div>
       </div>
-
       <div className="text-right flex-shrink-0">
         <p className="font-bold text-brand-400 text-sm">{formatPrice(event.minPrice)}</p>
-        <p className="text-xs text-white/30 mt-0.5">от</p>
+        <p className="text-xs text-white/30 mt-0.5">{t('events.from')}</p>
       </div>
     </motion.div>
   );
@@ -55,6 +52,7 @@ function HotCard({ event, index }) {
 
 export default function HotEvents() {
   const { events, loading } = useEvents({ hot: 'true', limit: 6 });
+  const { t } = useTranslation();
 
   return (
     <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6">
@@ -62,15 +60,15 @@ export default function HotEvents() {
         viewport={{ once: true }} className="flex items-end justify-between mb-12">
         <div>
           <p className="text-red-400 text-sm font-semibold uppercase tracking-widest mb-3 flex items-center gap-2">
-            <Flame className="w-4 h-4" /> Горячие билеты
+            <Flame className="w-4 h-4" /> {t('home.hot.title')}
           </p>
           <h2 className="section-title">
-            Раскупают <span className="text-gradient">прямо сейчас</span>
+            {t('home.hot.subtitle')}
           </h2>
         </div>
         <Link to="/events?hot=true"
           className="hidden sm:flex items-center gap-2 text-sm text-white/50 hover:text-red-400 transition-colors group">
-          Смотреть все <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          {t('events.all')} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </motion.div>
 

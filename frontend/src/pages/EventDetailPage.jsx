@@ -9,48 +9,45 @@ import { formatDateTime, formatPrice, formatDate } from '@/lib/utils';
 import api from '@/lib/api';
 import toast from 'react-hot-toast';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function EventDetailPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { event, loading, error } = useEvent(slug);
   const { isAuthenticated } = useAuthStore();
+  const { t } = useTranslation();
 
-  // ALL hooks must be before any early return
   const [isFav, setIsFav] = useState(false);
   const [activeImg, setActiveImg] = useState(0);
   const [selectedSession, setSelectedSession] = useState(null);
 
-  // Sync isFav when event data loads from API
   useEffect(() => {
-    if (event?.isFavorited !== undefined) {
-      setIsFav(event.isFavorited);
-    }
+    if (event?.isFavorited !== undefined) setIsFav(event.isFavorited);
   }, [event?.isFavorited]);
 
   const handleFavorite = async () => {
     if (!isAuthenticated) return navigate('/login');
-    if (!event?.id) return toast.error('Событие не найдено в базе');
+    if (!event?.id) return toast.error(t('eventDetail.notFound'));
     try {
       const { data } = await api.post(`/events/${event.id}/favorite`);
       setIsFav(data.isFavorited);
-      toast.success(data.isFavorited ? '❤️ Добавлено в избранное' : 'Удалено из избранного');
+      toast.success(data.isFavorited ? t('eventDetail.addedFav') : t('eventDetail.removedFav'));
     } catch (err) {
-      const msg = err.response?.data?.error || 'Ошибка';
-      toast.error(msg);
+      toast.error(err.response?.data?.error || t('common.error'));
     }
   };
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
-    toast.success('🔗 Ссылка скопирована');
+    toast.success(t('eventDetail.shareLink'));
   };
 
   if (loading) return (
     <div className="min-h-screen pt-24 flex items-center justify-center">
       <div className="text-center">
         <div className="w-12 h-12 border-2 border-brand-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-        <p className="text-white/40">Загружаем событие...</p>
+        <p className="text-white/40">{t('eventDetail.loading')}</p>
       </div>
     </div>
   );
@@ -59,9 +56,9 @@ export default function EventDetailPage() {
     <div className="min-h-screen pt-24 flex items-center justify-center text-center px-4">
       <div>
         <p className="text-7xl mb-5">😕</p>
-        <h2 className="text-2xl font-bold mb-3">Событие не найдено</h2>
-        <p className="text-white/40 mb-6">Возможно, оно было удалено или перемещено</p>
-        <button onClick={() => navigate('/events')} className="btn-primary px-8">К афише</button>
+        <h2 className="text-2xl font-bold mb-3">{t('eventDetail.notFound')}</h2>
+        <p className="text-white/40 mb-6">{t('eventDetail.notFoundSub')}</p>
+        <button onClick={() => navigate('/events')} className="btn-primary px-8">{t('eventDetail.backToPoster')}</button>
       </div>
     </div>
   );
@@ -99,8 +96,8 @@ export default function EventDetailPage() {
           <span className="badge glass text-white backdrop-blur-sm border border-white/20 px-4 py-2">
             {event.category?.icon} {event.category?.name}
           </span>
-          {event.isHot && <span className="badge bg-red-500/90 text-white backdrop-blur-sm px-3 py-2"><Flame className="w-3.5 h-3.5" /> Хит</span>}
-          {event.isFeatured && <span className="badge bg-brand-500/90 text-white backdrop-blur-sm px-3 py-2"><Star className="w-3.5 h-3.5" /> Топ</span>}
+          {event.isHot && <span className="badge bg-red-500/90 text-white backdrop-blur-sm px-3 py-2"><Flame className="w-3.5 h-3.5" /> {t('nav.hot')}</span>}
+          {event.isFeatured && <span className="badge bg-brand-500/90 text-white backdrop-blur-sm px-3 py-2"><Star className="w-3.5 h-3.5" /> {t('nav.top')}</span>}
         </div>
 
         {/* Gallery thumbnails */}
@@ -143,9 +140,9 @@ export default function EventDetailPage() {
               {/* Meta cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
                 {[
-                  { icon: Calendar, label: 'Дата и время', value: formatDateTime(event.startDate), color: 'text-brand-400', bg: 'bg-brand-500/10' },
-                  { icon: MapPin,   label: 'Место',        value: `${event.venue?.name}, ${event.venue?.city}`, color: 'text-neon-pink', bg: 'bg-pink-500/10' },
-                  { icon: Clock,    label: 'Длительность', value: event.duration ? `${event.duration} мин` : 'Уточняется', color: 'text-neon-cyan', bg: 'bg-cyan-500/10' },
+                  { icon: Calendar, label: t('eventDetail.dateTime'), value: formatDateTime(event.startDate), color: 'text-brand-400', bg: 'bg-brand-500/10' },
+                  { icon: MapPin,   label: t('eventDetail.venue'),    value: `${event.venue?.name}, ${event.venue?.city}`, color: 'text-neon-pink', bg: 'bg-pink-500/10' },
+                  { icon: Clock,    label: t('eventDetail.duration'), value: event.duration ? t('eventDetail.durationValue', { min: event.duration }) : t('eventDetail.durationUnknown'), color: 'text-neon-cyan', bg: 'bg-cyan-500/10' },
                 ].map(item => (
                   <div key={item.label} className="glass-card p-4 flex items-center gap-3">
                     <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center flex-shrink-0 ${item.color}`}>
@@ -161,7 +158,7 @@ export default function EventDetailPage() {
 
               {/* Countdown */}
               <div className="glass-card p-6 mb-6">
-                <p className="text-xs text-white/30 uppercase tracking-widest mb-4">До начала события</p>
+                <p className="text-xs text-white/30 uppercase tracking-widest mb-4">{t('eventDetail.countdown')}</p>
                 <CountdownTimer targetDate={event.startDate} />
               </div>
 
@@ -169,7 +166,7 @@ export default function EventDetailPage() {
               {isCinema && (
                 <div className="glass-card p-6 mb-6">
                   <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-                    <Film className="w-5 h-5 text-red-400" /> Сеансы на сегодня
+                    <Film className="w-5 h-5 text-red-400" /> {t('eventDetail.sessions')}
                   </h2>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     {SESSIONS.map((s, i) => (
@@ -190,7 +187,7 @@ export default function EventDetailPage() {
                           : 'bg-white/10 text-white/50'
                         }`}>{s.format}</span>
                         <p className="text-xs font-semibold text-brand-400">{formatPrice(s.price)}</p>
-                        {!s.available && <p className="text-xs text-red-400 mt-1">Нет мест</p>}
+                        {!s.available && <p className="text-xs text-red-400 mt-1">{t('eventDetail.noSeats')}</p>}
                       </motion.button>
                     ))}
                   </div>
@@ -198,7 +195,7 @@ export default function EventDetailPage() {
                     <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
                       className="mt-4 p-3 glass rounded-xl border border-brand-400/30 flex items-center justify-between">
                       <p className="text-sm text-white/60">
-                        Выбран сеанс <span className="text-white font-bold">{SESSIONS[selectedSession].time}</span>
+                        {t('eventDetail.selectedSession')} <span className="text-white font-bold">{SESSIONS[selectedSession].time}</span>
                         {' '}·{' '}<span className="text-brand-400">{SESSIONS[selectedSession].format}</span>
                       </p>
                       <button onClick={() => setSelectedSession(null)} className="text-white/30 hover:text-white/60 text-xs">✕</button>
@@ -211,7 +208,7 @@ export default function EventDetailPage() {
               {isCinema && (
                 <div className="glass-card p-5 mb-6">
                   <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-                    <Monitor className="w-5 h-5 text-brand-400" /> Форматы показа
+                    <Monitor className="w-5 h-5 text-brand-400" /> {t('eventDetail.formats')}
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {[
@@ -235,7 +232,7 @@ export default function EventDetailPage() {
               {/* Description */}
               <div className="glass-card p-6 mb-6">
                 <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-                  <Ticket className="w-5 h-5 text-brand-400" /> О событии
+                  <Ticket className="w-5 h-5 text-brand-400" /> {t('eventDetail.about')}
                 </h2>
                 <p className="text-white/60 leading-relaxed whitespace-pre-line">{event.description}</p>
               </div>
@@ -261,7 +258,7 @@ export default function EventDetailPage() {
               {/* Buy ticket card */}
               <div className="glass-card p-6 neon-border">
                 <h3 className="font-display font-bold text-xl mb-5">
-                  {isCinema ? '🎬 Купить билет' : 'Купить билет'}
+                  {isCinema ? t('eventDetail.chooseSession') : t('eventDetail.buyTicket')}
                 </h3>
 
                 {/* Cinema: show selected session */}
@@ -286,7 +283,7 @@ export default function EventDetailPage() {
                 {isCinema && selectedSession === null && (
                   <div className="mb-4 p-3 rounded-xl border border-yellow-500/20 bg-yellow-500/5">
                     <p className="text-xs text-yellow-400 flex items-center gap-1.5">
-                      <Film className="w-3.5 h-3.5" /> Выберите сеанс слева
+                      <Film className="w-3.5 h-3.5" /> {t('eventDetail.selectSession')}
                     </p>
                   </div>
                 )}
@@ -330,14 +327,14 @@ export default function EventDetailPage() {
                 {event.totalSeats > 0 && (
                   <div className="mb-5">
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-white/40 flex items-center gap-1.5"><Users className="w-4 h-4" /> Мест осталось</span>
+                      <span className="text-white/40 flex items-center gap-1.5"><Users className="w-4 h-4" /> {t('eventDetail.seatsLeft')}</span>
                       <span className="font-semibold">{event.totalSeats - event.soldSeats}</span>
                     </div>
                     <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                       <motion.div initial={{ width: 0 }} animate={{ width: `${soldPct}%` }} transition={{ duration: 1, delay: 0.5 }}
                         className={`h-full rounded-full ${soldPct > 80 ? 'bg-gradient-to-r from-red-500 to-orange-400' : 'bg-gradient-to-r from-brand-500 to-neon-pink'}`} />
                     </div>
-                    {soldPct > 80 && <p className="text-xs text-red-400 mt-1.5">🔥 Осталось мало мест!</p>}
+                    {soldPct > 80 && <p className="text-xs text-red-400 mt-1.5">{t('eventDetail.almostSoldOut')}</p>}
                   </div>
                 )}
 
@@ -345,19 +342,19 @@ export default function EventDetailPage() {
                   onClick={() => navigate(isAuthenticated ? `/events/${slug}/seats` : '/login')}
                   disabled={isCinema && selectedSession === null}
                   className="btn-primary w-full flex items-center justify-center gap-2 py-4 text-base rounded-xl disabled:opacity-50 disabled:cursor-not-allowed">
-                  {isCinema ? <><Film className="w-5 h-5" /> Выбрать места</> : <>Выбрать места <ChevronRight className="w-5 h-5" /></>}
+                  {isCinema ? <><Film className="w-5 h-5" /> {t('eventDetail.selectSeats')}</> : <>{t('eventDetail.selectSeats')} <ChevronRight className="w-5 h-5" /></>}
                 </motion.button>
 
-                <p className="text-xs text-white/25 text-center mt-3">🔒 Безопасная оплата · Мгновенная доставка</p>
+                <p className="text-xs text-white/25 text-center mt-3">{t('eventDetail.safePayment')}</p>
               </div>
 
               {/* Venue info */}
               <div className="glass-card p-5">
-                <h4 className="font-semibold text-sm mb-3 text-white/60 uppercase tracking-wider">Площадка</h4>
+                <h4 className="font-semibold text-sm mb-3 text-white/60 uppercase tracking-wider">{t('eventDetail.venueInfo')}</h4>
                 <p className="font-bold mb-1">{event.venue?.name}</p>
                 <p className="text-sm text-white/40 flex items-center gap-1.5">
                   <MapPin className="w-4 h-4 text-neon-pink" />
-                  {event.venue?.city}, Казахстан
+                  {event.venue?.city}, {t('common.kazakhstan')}
                 </p>
               </div>
             </motion.div>

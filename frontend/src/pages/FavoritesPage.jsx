@@ -4,15 +4,16 @@ import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
 import api from '@/lib/api';
 import EventCard from '@/components/ui/EventCard';
+import { useTranslation } from 'react-i18next';
 
 export default function FavoritesPage() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     api.get('/users/favorites')
       .then(({ data }) => {
-        // Normalize snake_case from Supabase to camelCase
         const normalized = (data || []).map(event => ({
           ...event,
           startDate: event.startDate ?? event.start_date,
@@ -33,15 +34,14 @@ export default function FavoritesPage() {
 
   return (
     <>
-      <Helmet><title>Избранное — TicketHub</title></Helmet>
+      <Helmet><title>{t('favorites.title')} — TicketHub</title></Helmet>
       <div className="min-h-screen pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <h1 className="section-title mb-8">
               <Heart className="inline w-8 h-8 text-red-400 mr-2" />
-              Избранное
+              {t('favorites.title')}
             </h1>
-
             {loading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[1,2,3,4].map(i => <div key={i} className="h-72 skeleton rounded-2xl" />)}
@@ -49,9 +49,9 @@ export default function FavoritesPage() {
             ) : events.length === 0 ? (
               <div className="text-center py-20">
                 <Heart className="w-16 h-16 text-white/10 mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-2">Нет избранных</h3>
-                <p className="text-white/40 mb-6">Добавляйте события в избранное</p>
-                <a href="/events" className="btn-primary">К афише</a>
+                <h3 className="text-xl font-bold mb-2">{t('favorites.empty')}</h3>
+                <p className="text-white/40 mb-6">{t('favorites.emptySub')}</p>
+                <a href="/events" className="btn-primary">{t('favorites.toPoster')}</a>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

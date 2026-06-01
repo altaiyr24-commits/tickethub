@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { formatDateTime, formatPrice } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 import api from '@/lib/api';
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     api.get('/admin/orders', { params: { limit: 50 } })
@@ -27,13 +29,23 @@ export default function AdminOrders() {
     CANCELLED: 'text-red-400 bg-red-400/10',
   };
 
+  const columns = [
+    'ID',
+    t('admin.orders.columns.client'),
+    t('admin.orders.columns.event'),
+    t('admin.orders.columns.tickets'),
+    t('admin.orders.columns.amount'),
+    t('admin.orders.columns.status'),
+    t('admin.orders.columns.date'),
+  ];
+
   return (
     <>
-      <Helmet><title>Заказы — Admin</title></Helmet>
+      <Helmet><title>{t('admin.orders.title')} — Admin</title></Helmet>
       <div className="p-8">
         <div className="mb-8">
-          <h1 className="font-display text-3xl font-black mb-1">Заказы</h1>
-          <p className="text-white/40">{orders.length} заказов</p>
+          <h1 className="font-display text-3xl font-black mb-1">{t('admin.orders.title')}</h1>
+          <p className="text-white/40">{orders.length} {t('admin.orders.title').toLowerCase()}</p>
         </div>
 
         {loading ? (
@@ -43,7 +55,7 @@ export default function AdminOrders() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-white/10">
-                  {['ID', 'Клиент', 'Событие', 'Билетов', 'Сумма', 'Статус', 'Дата'].map(h => (
+                  {columns.map(h => (
                     <th key={h} className="text-left px-4 py-3 text-xs text-white/40 uppercase tracking-wider">{h}</th>
                   ))}
                 </tr>
@@ -59,7 +71,7 @@ export default function AdminOrders() {
                     <td className="px-4 py-3 text-sm font-bold text-brand-400">{formatPrice(order.totalAmount)}</td>
                     <td className="px-4 py-3">
                       <span className={`badge text-xs ${statusColors[order.status] || 'text-white/40 bg-white/5'}`}>
-                        {order.status}
+                        {t(`orders.status.${order.status}`) || order.status}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-xs text-white/30">{formatDateTime(order.createdAt)}</td>

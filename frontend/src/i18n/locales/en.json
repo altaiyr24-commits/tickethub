@@ -1,0 +1,356 @@
+{
+  "nav": {
+    "poster": "Events",
+    "categories": "Categories",
+    "hot": "Hot",
+    "top": "Top",
+    "login": "Sign In",
+    "register": "Sign Up",
+    "profile": "Profile",
+    "myTickets": "My Tickets",
+    "favorites": "Favorites",
+    "adminPanel": "Admin Panel",
+    "logout": "Sign Out",
+    "search": "Search...",
+    "categories_list": {
+      "concerts": "Concerts",
+      "theatre": "Theatre",
+      "sport": "Sport",
+      "standup": "Stand-up",
+      "exhibition": "Exhibitions",
+      "cinema": "Cinema"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "#1 Platform in Kazakhstan",
+      "title": "Tickets to the best",
+      "titleHighlight": "events",
+      "subtitle": "Concerts, theatre, sports, cinema — all in one place. Buy tickets online in seconds.",
+      "browsePoster": "Browse Events",
+      "hotTickets": "Hot Tickets",
+      "stats": {
+        "events": "events",
+        "cities": "cities",
+        "tickets": "tickets sold",
+        "rating": "rating"
+      }
+    },
+    "featured": {
+      "title": "Featured",
+      "subtitle": "Top events of this season"
+    },
+    "hot": {
+      "title": "Selling Fast",
+      "subtitle": "Hurry — seats are almost gone"
+    },
+    "stats": {
+      "title": "TicketHub in Numbers",
+      "events": "Events",
+      "cities": "Cities",
+      "tickets": "Tickets Sold",
+      "users": "Users"
+    },
+    "newsletter": {
+      "title": "Never miss an event",
+      "subtitle": "Subscribe and be the first to know about new events",
+      "placeholder": "Your email",
+      "button": "Subscribe",
+      "success": "You're subscribed!"
+    },
+    "categories": {
+      "title": "Categories",
+      "subtitle": "Find an event you'll love"
+    }
+  },
+  "events": {
+    "title": "Events",
+    "loading": "Loading...",
+    "total": "{{count}} events",
+    "filters": "{{count}} filter(s)",
+    "notFound": "Nothing found",
+    "notFoundSub": "Try changing filters or search query",
+    "resetFilters": "Reset Filters",
+    "all": "All",
+    "searchPlaceholder": "Search events, artists, teams...",
+    "sort": {
+      "date": "📅 By Date",
+      "popular": "🔥 By Popularity",
+      "price": "💰 By Price"
+    },
+    "from": "from",
+    "buy": "Buy",
+    "seatsLeft": "{{count}} seats left",
+    "soldPercent": "{{percent}}% sold",
+    "almostSoldOut": "🔥 Almost sold out — {{count}} left"
+  },
+  "eventDetail": {
+    "dateTime": "Date & Time",
+    "venue": "Venue",
+    "duration": "Duration",
+    "durationValue": "{{min}} min",
+    "durationUnknown": "TBD",
+    "countdown": "Event starts in",
+    "about": "About",
+    "sessions": "Today's Sessions",
+    "formats": "Screening Formats",
+    "noSeats": "No seats",
+    "selectedSession": "Selected session",
+    "selectSession": "Select a session on the left",
+    "buyTicket": "Buy Ticket",
+    "selectSeats": "Select Seats",
+    "seatsLeft": "Seats left",
+    "almostSoldOut": "🔥 Almost sold out!",
+    "safePayment": "🔒 Secure payment · Instant delivery",
+    "venueInfo": "Venue",
+    "shareLink": "🔗 Link copied",
+    "addedFav": "❤️ Added to favorites",
+    "removedFav": "Removed from favorites",
+    "notFound": "Event not found",
+    "notFoundSub": "It may have been deleted or moved",
+    "backToPoster": "Back to Events",
+    "loading": "Loading event...",
+    "chooseSession": "🎬 Select Seats",
+    "standard": "Standard",
+    "vip": "VIP"
+  },
+  "seats": {
+    "title": "Tickets — {{event}}",
+    "tickets": "Tickets",
+    "schemeTitle": "Seat Map",
+    "schemeHint": "Click — select · Scroll — zoom · Drag — pan",
+    "noScheme": "Seat map not configured",
+    "selectedSeats": "Selected Seats",
+    "clickSeat": "Click on a seat",
+    "maxSeats": "Max 10 seats",
+    "maxSeatsError": "Maximum 10 seats",
+    "seatAdded": "Seat {{row}}{{number}} added",
+    "toPayment": "To Payment",
+    "clearSelection": "Clear Selection",
+    "prices": "Prices",
+    "standard": "Standard",
+    "premium": "Premium",
+    "vip": "VIP",
+    "timeWarning": "You have <b>10 minutes</b> to complete payment",
+    "selectTickets": "Select Tickets",
+    "available": "{{count}} available",
+    "toCheckout": "Proceed to Checkout",
+    "instantDelivery": "Instant email delivery",
+    "safePayment": "Secure SSL payment",
+    "qrCode": "QR code for entry",
+    "selectAtLeastOne": "Select at least one ticket",
+    "selectAtLeastOneSeat": "Select at least one seat"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "back": "Back",
+    "timeLeft": "Seats reserved. Time left: {{time}}",
+    "paymentMethod": "Payment Method",
+    "card": "Card",
+    "kaspiPay": "Kaspi Pay",
+    "qrCode": "QR Code",
+    "cardData": "Card Details",
+    "flip": "Flip",
+    "random": "🎲 Random",
+    "cardNumber": "Card Number",
+    "expiry": "Expiry Date",
+    "cvv": "CVV",
+    "cardName": "Cardholder Name",
+    "demoMode": "Demo mode: card generated automatically",
+    "kaspiScan": "Scan QR code in the Kaspi.kz app",
+    "qrScan": "Scan with any banking app",
+    "emailNotice": "Tickets will be sent to email",
+    "pay": "Pay {{amount}}",
+    "sslNotice": "Secure SSL connection",
+    "yourOrder": "Your Order",
+    "serviceFee": "Service Fee",
+    "included": "Included",
+    "total": "Total",
+    "emailDelivery": "Tickets sent to email immediately after payment",
+    "processing": "Processing payment...",
+    "dontClose": "Don't close this page",
+    "timeExpired": "Time expired",
+    "row": "Row {{row}}, Seat {{number}}",
+    "seat": "{{row}}"
+  },
+  "orderSuccess": {
+    "title": "Order Confirmed",
+    "paid": "Payment successful!",
+    "emailSent": "Tickets sent to your email",
+    "myTickets": "My Tickets",
+    "share": "Share",
+    "home": "Home",
+    "linkCopied": "Link copied",
+    "total": "Total",
+    "row": "Row {{row}}, Seat {{number}}",
+    "ticket": "Ticket {{number}}",
+    "showQr": "Show QR code at the entrance"
+  },
+  "orders": {
+    "title": "My Tickets",
+    "empty": "No tickets",
+    "emptySub": "Buy tickets for upcoming events",
+    "toPoster": "Browse Events",
+    "status": {
+      "CONFIRMED": "Paid",
+      "PENDING": "Pending",
+      "CANCELLED": "Cancelled"
+    },
+    "tickets": "{{count}} ticket(s)",
+    "orderDetails": "Order Details",
+    "total": "Total",
+    "row": "Row {{row}}, Seat {{number}}",
+    "ticket": "Ticket {{number}}"
+  },
+  "favorites": {
+    "title": "Favorites",
+    "empty": "No favorites",
+    "emptySub": "Add events to your favorites",
+    "toPoster": "Browse Events"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign In",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Sign Up",
+      "demo": "Demo accounts",
+      "loading": "Loading..."
+    },
+    "register": {
+      "title": "Create account",
+      "subtitle": "Join TicketHub",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "password": "Password",
+      "passwordPlaceholder": "At least 6 characters",
+      "confirm": "Confirm password",
+      "confirmPlaceholder": "Repeat password",
+      "submit": "Sign Up",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign In",
+      "errors": {
+        "nameMin": "At least 2 characters",
+        "emailInvalid": "Invalid email",
+        "passwordMin": "At least 6 characters",
+        "passwordMatch": "Passwords don't match"
+      }
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "data": "Details",
+    "security": "Security",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "phone": "Phone",
+    "phonePlaceholder": "+7 (777) 000-00-00",
+    "save": "Save",
+    "saving": "Saving...",
+    "saved": "Profile updated",
+    "saveError": "Save error",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "changePassword": "Change Password",
+    "passwordChanged": "Password changed",
+    "passwordMismatch": "Passwords don't match",
+    "roles": {
+      "ADMIN": "👑 Administrator",
+      "USER": "👤 User"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "TicketHub platform overview",
+      "users": "Users",
+      "events": "Events",
+      "orders": "Orders",
+      "revenue": "Revenue",
+      "recentOrders": "Recent Orders",
+      "topEvents": "Top Events"
+    },
+    "events": {
+      "title": "Events",
+      "subtitle": "{{count}} events in database",
+      "add": "Add",
+      "searchPlaceholder": "Search by title or venue...",
+      "columns": {
+        "event": "Event",
+        "category": "Category",
+        "date": "Date",
+        "price": "Price",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "noEvents": "No events",
+      "save": "💾 Save Changes",
+      "create": "✅ Create Event",
+      "cancel": "Cancel",
+      "deleteConfirm": "Delete event? This action is irreversible.",
+      "deleted": "Deleted",
+      "updated": "✅ Event updated",
+      "created": "✅ Event created"
+    },
+    "users": {
+      "title": "Users",
+      "searchPlaceholder": "Search by name or email...",
+      "makeAdmin": "Make Admin",
+      "makeUser": "Make User"
+    },
+    "orders": {
+      "title": "Orders"
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "events": "Events",
+      "users": "Users",
+      "orders": "Orders",
+      "backToSite": "Back to Site"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "dateUnknown": "Date TBD",
+    "kazakhstan": "Kazakhstan",
+    "seats": "seats",
+    "place": "Seat {{number}}",
+    "row": "Row {{row}}"
+  },
+  "footer": {
+    "description": "Platform for buying tickets to the best events in Kazakhstan",
+    "events": "Events",
+    "poster": "Poster",
+    "categories": "Categories",
+    "hot": "Hot Tickets",
+    "top": "Top Events",
+    "company": "Company",
+    "about": "About Us",
+    "contacts": "Contacts",
+    "faq": "FAQ",
+    "support": "Support",
+    "rights": "© {{year}} TicketHub. All rights reserved.",
+    "madeIn": "Made in Kazakhstan 🇰🇿"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "subtitle": "It may have been deleted or moved",
+    "home": "Go Home"
+  }
+}

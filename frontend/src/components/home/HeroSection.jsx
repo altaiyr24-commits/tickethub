@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ArrowRight, Calendar, MapPin, Flame, Star } from 'lucide-react';
 import { useFeaturedEvents } from '@/hooks/useEvents';
 import { formatDate, formatPrice } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 const GRADIENTS = [
   'from-violet-900/70 via-purple-900/40',
@@ -11,11 +12,20 @@ const GRADIENTS = [
   'from-cyan-900/70 via-blue-900/40',
 ];
 
+const CATEGORY_SLUGS = [
+  { slug: 'concerts',   icon: '🎵', key: 'nav.categories_list.concerts' },
+  { slug: 'theatre',    icon: '🎭', key: 'nav.categories_list.theatre' },
+  { slug: 'sport',      icon: '⚽', key: 'nav.categories_list.sport' },
+  { slug: 'standup',    icon: '🎤', key: 'nav.categories_list.standup' },
+  { slug: 'exhibition', icon: '🖼️', key: 'nav.categories_list.exhibition' },
+];
+
 export default function HeroSection() {
   const [query, setQuery] = useState('');
   const [current, setCurrent] = useState(0);
   const { events } = useFeaturedEvents();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!events.length) return;
@@ -32,7 +42,6 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* BG slideshow */}
       <AnimatePresence mode="wait">
         {currentEvent && (
           <motion.div key={current} initial={{ opacity: 0, scale: 1.06 }} animate={{ opacity: 1, scale: 1 }}
@@ -44,7 +53,6 @@ export default function HeroSection() {
         )}
       </AnimatePresence>
 
-      {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(15)].map((_, i) => (
           <motion.div key={i} className="absolute rounded-full"
@@ -57,59 +65,47 @@ export default function HeroSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-20 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left: text + search */}
+
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
               className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full text-sm text-brand-300 mb-6 border border-brand-500/30">
               <Flame className="w-4 h-4 text-orange-400" />
-              <span>Лучшие события Казахстана 2025</span>
+              <span>{t('home.hero.badge')}</span>
             </motion.div>
 
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] mb-6">
-              <span className="text-white">Живи</span>{' '}
-              <span className="text-gradient">ярко</span>
-              <br />
-              <span className="text-white">каждый</span>{' '}
-              <span className="text-gradient">день</span>
+              <span className="text-white">{t('home.hero.title')}</span>{' '}
+              <span className="text-gradient">{t('home.hero.titleHighlight')}</span>
             </h1>
 
             <p className="text-white/55 text-lg mb-8 max-w-lg leading-relaxed">
-              Концерты мировых звёзд, театральные премьеры, спортивные баталии — покупай билеты за секунды
+              {t('home.hero.subtitle')}
             </p>
 
-            {/* Search bar */}
             <form onSubmit={handleSearch} className="flex gap-3 mb-8 max-w-lg">
               <div className="flex-1 relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" />
                 <input type="text" value={query} onChange={e => setQuery(e.target.value)}
-                  placeholder="Поиск событий, артистов, команд..."
+                  placeholder={t('events.searchPlaceholder')}
                   className="input-field pl-12 h-14 text-base rounded-2xl" />
               </div>
               <motion.button type="submit" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
                 className="btn-primary h-14 px-6 rounded-2xl flex items-center gap-2 text-base font-semibold">
-                Найти <ArrowRight className="w-4 h-4" />
+                {t('home.hero.browsePoster')} <ArrowRight className="w-4 h-4" />
               </motion.button>
             </form>
 
-            {/* Quick filters */}
             <div className="flex flex-wrap gap-2">
-              {[
-                { label: '🎵 Концерты', cat: 'concerts' },
-                { label: '🎭 Театр', cat: 'theatre' },
-                { label: '⚽ Спорт', cat: 'sport' },
-                { label: '🎤 Стендап', cat: 'standup' },
-                { label: '🖼️ Выставки', cat: 'exhibition' },
-              ].map(item => (
-                <motion.button key={item.cat} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-                  onClick={() => navigate(`/events?category=${item.cat}`)}
+              {CATEGORY_SLUGS.map(item => (
+                <motion.button key={item.slug} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                  onClick={() => navigate(`/events?category=${item.slug}`)}
                   className="glass px-4 py-2 rounded-full text-sm text-white/65 hover:text-white hover:border-brand-400/50 transition-all">
-                  {item.label}
+                  {item.icon} {t(item.key)}
                 </motion.button>
               ))}
             </div>
           </motion.div>
 
-          {/* Right: featured event card */}
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }}
             className="hidden lg:block">
             <AnimatePresence mode="wait">
@@ -122,8 +118,8 @@ export default function HeroSection() {
                     <img src={currentEvent.poster} alt={currentEvent.title} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-dark-900/90 to-transparent" />
                     <div className="absolute top-3 left-3 flex gap-2">
-                      {currentEvent.isHot && <span className="badge bg-red-500/90 text-white text-xs"><Flame className="w-3 h-3" /> Хит</span>}
-                      {currentEvent.isFeatured && <span className="badge bg-brand-500/90 text-white text-xs"><Star className="w-3 h-3" /> Топ</span>}
+                      {currentEvent.isHot && <span className="badge bg-red-500/90 text-white text-xs"><Flame className="w-3 h-3" /> {t('nav.hot')}</span>}
+                      {currentEvent.isFeatured && <span className="badge bg-brand-500/90 text-white text-xs"><Star className="w-3 h-3" /> {t('nav.top')}</span>}
                     </div>
                     <div className="absolute bottom-3 left-3 right-3">
                       <p className="font-display font-bold text-lg leading-tight mb-1">{currentEvent.title}</p>
@@ -135,18 +131,16 @@ export default function HeroSection() {
                   </div>
                   <div className="p-4 flex items-center justify-between">
                     <div>
-                      <p className="text-xs text-white/40">от</p>
+                      <p className="text-xs text-white/40">{t('events.from')}</p>
                       <p className="font-display font-black text-xl text-brand-400">{formatPrice(currentEvent.minPrice)}</p>
                     </div>
                     <motion.div whileHover={{ scale: 1.05 }} className="btn-primary py-2.5 px-5 text-sm rounded-xl">
-                      Купить билет
+                      {t('eventDetail.buyTicket')}
                     </motion.div>
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
-
-            {/* Slide dots */}
             <div className="flex justify-center gap-2 mt-4">
               {events.slice(0, 3).map((_, i) => (
                 <button key={i} onClick={() => setCurrent(i)}
@@ -156,23 +150,21 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Stats row */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
           className="grid grid-cols-3 gap-4 max-w-lg mt-12">
           {[
-            { value: '500K+', label: 'Билетов продано' },
-            { value: '1200+', label: 'Событий в год' },
-            { value: '4.9★', label: 'Рейтинг' },
+            { value: '500K+', key: 'home.hero.stats.tickets' },
+            { value: '1200+', key: 'home.hero.stats.events' },
+            { value: '4.9★', key: 'home.hero.stats.rating' },
           ].map(s => (
-            <div key={s.label} className="text-center">
+            <div key={s.key} className="text-center">
               <p className="font-display font-black text-2xl text-gradient">{s.value}</p>
-              <p className="text-xs text-white/40 mt-0.5">{s.label}</p>
+              <p className="text-xs text-white/40 mt-0.5">{t(s.key)}</p>
             </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2"
         animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
         <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center pt-2">

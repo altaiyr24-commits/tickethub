@@ -1,0 +1,411 @@
+{
+  "nav": {
+    "poster": "Афиша",
+    "categories": "Категории",
+    "hot": "Горячие",
+    "top": "Топ",
+    "login": "Войти",
+    "register": "Регистрация",
+    "profile": "Профиль",
+    "myTickets": "Мои билеты",
+    "favorites": "Избранное",
+    "adminPanel": "Админ панель",
+    "logout": "Выйти",
+    "search": "Поиск...",
+    "categories_list": {
+      "concerts": "Концерты",
+      "theatre": "Театр",
+      "sport": "Спорт",
+      "standup": "Стендап",
+      "exhibition": "Выставки",
+      "cinema": "Кино"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "Платформа №1 в Казахстане",
+      "title": "Билеты на лучшие",
+      "titleHighlight": "события",
+      "subtitle": "Концерты, театр, спорт, кино — всё в одном месте. Покупай билеты онлайн за секунды.",
+      "browsePoster": "Смотреть афишу",
+      "hotTickets": "Горячие билеты",
+      "stats": {
+        "events": "событий",
+        "cities": "города",
+        "tickets": "билетов продано",
+        "rating": "рейтинг"
+      }
+    },
+    "featured": {
+      "title": "Рекомендуем",
+      "subtitle": "Топовые события этого сезона"
+    },
+    "hot": {
+      "title": "Раскупают прямо сейчас",
+      "subtitle": "Торопись — мест почти не осталось"
+    },
+    "stats": {
+      "title": "TicketHub в цифрах",
+      "events": "Мероприятий",
+      "cities": "Городов",
+      "tickets": "Билетов продано",
+      "users": "Пользователей"
+    },
+    "newsletter": {
+      "title": "Не пропусти ни одного события",
+      "subtitle": "Подпишись и получай уведомления о новых мероприятиях первым",
+      "placeholder": "Твой email",
+      "button": "Подписаться",
+      "success": "Ты подписан!"
+    },
+    "categories": {
+      "title": "Категории",
+      "subtitle": "Найди событие по душе"
+    }
+  },
+  "events": {
+    "title": "Афиша событий",
+    "loading": "Загрузка...",
+    "total": "{{count}} событий",
+    "filters": "{{count}} фильтр(а)",
+    "notFound": "Ничего не найдено",
+    "notFoundSub": "Попробуй изменить фильтры или поисковый запрос",
+    "resetFilters": "Сбросить фильтры",
+    "all": "Все",
+    "searchPlaceholder": "Поиск событий, артистов, команд...",
+    "sort": {
+      "date": "📅 По дате",
+      "popular": "🔥 По популярности",
+      "price": "💰 По цене"
+    },
+    "from": "от",
+    "buy": "Купить",
+    "seatsLeft": "{{count}} мест осталось",
+    "soldPercent": "{{percent}}% продано",
+    "almostSoldOut": "🔥 Почти нет мест — осталось {{count}}"
+  },
+  "eventDetail": {
+    "dateTime": "Дата и время",
+    "venue": "Место",
+    "duration": "Длительность",
+    "durationValue": "{{min}} мин",
+    "durationUnknown": "Уточняется",
+    "countdown": "До начала события",
+    "about": "О событии",
+    "sessions": "Сеансы на сегодня",
+    "formats": "Форматы показа",
+    "noSeats": "Нет мест",
+    "selectedSession": "Выбран сеанс",
+    "selectSession": "Выберите сеанс слева",
+    "buyTicket": "Купить билет",
+    "selectSeats": "Выбрать места",
+    "seatsLeft": "Мест осталось",
+    "almostSoldOut": "🔥 Осталось мало мест!",
+    "safePayment": "🔒 Безопасная оплата · Мгновенная доставка",
+    "venueInfo": "Площадка",
+    "shareLink": "🔗 Ссылка скопирована",
+    "addedFav": "❤️ Добавлено в избранное",
+    "removedFav": "Удалено из избранного",
+    "notFound": "Событие не найдено",
+    "notFoundSub": "Возможно, оно было удалено или перемещено",
+    "backToPoster": "К афише",
+    "loading": "Загружаем событие...",
+    "chooseSession": "🎬 Выбрать места",
+    "standard": "Стандарт",
+    "vip": "VIP"
+  },
+  "seats": {
+    "title": "Билеты — {{event}}",
+    "tickets": "Билеты",
+    "schemeTitle": "Схема зала",
+    "schemeHint": "Клик — выбор · Колёсико — зум · Тяни — перемещение",
+    "noScheme": "Схема зала не настроена",
+    "selectedSeats": "Выбранные места",
+    "clickSeat": "Нажмите на место",
+    "maxSeats": "Макс. 10 мест",
+    "maxSeatsError": "Максимум 10 мест",
+    "seatAdded": "Место {{row}}{{number}} добавлено",
+    "toPayment": "К оплате",
+    "clearSelection": "Очистить выбор",
+    "prices": "Цены",
+    "standard": "Стандарт",
+    "premium": "Premium",
+    "vip": "VIP",
+    "timeWarning": "После выбора у вас <b>10 минут</b> для оплаты",
+    "selectTickets": "Выберите билеты",
+    "available": "{{count}} доступно",
+    "toCheckout": "Перейти к оплате",
+    "instantDelivery": "Мгновенная доставка на email",
+    "safePayment": "Безопасная оплата SSL",
+    "qrCode": "QR-код для входа",
+    "selectAtLeastOne": "Выберите хотя бы один билет",
+    "selectAtLeastOneSeat": "Выберите хотя бы одно место"
+  },
+  "checkout": {
+    "title": "Оформление заказа",
+    "back": "Назад",
+    "timeLeft": "Места забронированы. Осталось: {{time}}",
+    "paymentMethod": "Способ оплаты",
+    "card": "Карта",
+    "kaspiPay": "Kaspi Pay",
+    "qrCode": "QR-код",
+    "cardData": "Данные карты",
+    "flip": "Перевернуть",
+    "random": "🎲 Случайная",
+    "cardNumber": "Номер карты",
+    "expiry": "Срок действия",
+    "cvv": "CVV",
+    "cardName": "Имя на карте",
+    "demoMode": "Демо-режим: карта сгенерирована автоматически",
+    "kaspiScan": "Отсканируйте QR-код в приложении Kaspi.kz",
+    "qrScan": "Отсканируйте код любым банковским приложением",
+    "emailNotice": "Билеты придут на email",
+    "pay": "Оплатить {{amount}}",
+    "sslNotice": "Защищённое соединение SSL",
+    "yourOrder": "Ваш заказ",
+    "serviceFee": "Сервисный сбор",
+    "included": "Включён",
+    "total": "Итого",
+    "emailDelivery": "Билеты придут на email сразу после оплаты",
+    "processing": "Обрабатываем оплату...",
+    "dontClose": "Не закрывайте страницу",
+    "timeExpired": "Время истекло",
+    "row": "Ряд {{row}}, Место {{number}}",
+    "seat": "{{row}}"
+  },
+  "orderSuccess": {
+    "title": "Заказ оформлен",
+    "paid": "Оплата прошла!",
+    "emailSent": "Билеты отправлены на ваш email",
+    "myTickets": "Мои билеты",
+    "share": "Поделиться",
+    "home": "На главную",
+    "linkCopied": "Ссылка скопирована",
+    "total": "Итого",
+    "row": "Ряд {{row}}, Место {{number}}",
+    "ticket": "Билет {{number}}",
+    "showQr": "Покажите QR-код на входе"
+  },
+  "orders": {
+    "title": "Мои билеты",
+    "empty": "Нет билетов",
+    "emptySub": "Купите билеты на ближайшие события",
+    "toPoster": "К афише",
+    "status": {
+      "CONFIRMED": "Оплачен",
+      "PENDING": "Ожидание",
+      "CANCELLED": "Отменён"
+    },
+    "tickets": "{{count}} билет(а)",
+    "orderDetails": "Детали заказа",
+    "total": "Итого",
+    "row": "Ряд {{row}}, Место {{number}}",
+    "ticket": "Билет {{number}}"
+  },
+  "favorites": {
+    "title": "Избранное",
+    "empty": "Нет избранных",
+    "emptySub": "Добавляйте события в избранное",
+    "toPoster": "К афише"
+  },
+  "auth": {
+    "login": {
+      "title": "Добро пожаловать",
+      "subtitle": "Войдите в свой аккаунт",
+      "email": "Email",
+      "password": "Пароль",
+      "forgotPassword": "Забыли пароль?",
+      "submit": "Войти",
+      "noAccount": "Нет аккаунта?",
+      "registerLink": "Зарегистрироваться",
+      "demo": "Демо аккаунты",
+      "loading": "Загрузка..."
+    },
+    "register": {
+      "title": "Создать аккаунт",
+      "subtitle": "Присоединяйся к TicketHub",
+      "name": "Имя",
+      "namePlaceholder": "Ваше имя",
+      "email": "Email",
+      "password": "Пароль",
+      "passwordPlaceholder": "Минимум 6 символов",
+      "confirm": "Подтвердите пароль",
+      "confirmPlaceholder": "Повторите пароль",
+      "submit": "Зарегистрироваться",
+      "hasAccount": "Уже есть аккаунт?",
+      "loginLink": "Войти",
+      "errors": {
+        "nameMin": "Минимум 2 символа",
+        "emailInvalid": "Некорректный email",
+        "passwordMin": "Минимум 6 символов",
+        "passwordMatch": "Пароли не совпадают"
+      }
+    }
+  },
+  "profile": {
+    "title": "Мой профиль",
+    "data": "Данные",
+    "security": "Безопасность",
+    "name": "Имя",
+    "namePlaceholder": "Ваше имя",
+    "email": "Email",
+    "phone": "Телефон",
+    "phonePlaceholder": "+7 (777) 000-00-00",
+    "save": "Сохранить",
+    "saving": "Сохранение...",
+    "saved": "Профиль обновлён",
+    "saveError": "Ошибка сохранения",
+    "currentPassword": "Текущий пароль",
+    "newPassword": "Новый пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "changePassword": "Изменить пароль",
+    "passwordChanged": "Пароль изменён",
+    "passwordMismatch": "Пароли не совпадают",
+    "roles": {
+      "ADMIN": "👑 Администратор",
+      "USER": "👤 Пользователь"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Дашборд",
+      "subtitle": "Обзор платформы TicketHub",
+      "users": "Пользователей",
+      "events": "Мероприятий",
+      "orders": "Заказов",
+      "revenue": "Выручка",
+      "recentOrders": "Последние заказы",
+      "topEvents": "Топ мероприятий"
+    },
+    "events": {
+      "title": "Мероприятия",
+      "subtitle": "{{count}} событий в базе",
+      "add": "Добавить",
+      "searchPlaceholder": "Поиск по названию или площадке...",
+      "columns": {
+        "event": "Мероприятие",
+        "category": "Категория",
+        "date": "Дата",
+        "price": "Цена",
+        "status": "Статус",
+        "actions": "Действия"
+      },
+      "noEvents": "Нет мероприятий",
+      "createTitle": "➕ Новое мероприятие",
+      "editTitle": "✏️ {{title}}",
+      "tabs": {
+        "basic": "📝 Основное",
+        "media": "🖼️ Медиа",
+        "settings": "⚙️ Настройки"
+      },
+      "fields": {
+        "title": "Название *",
+        "titlePlaceholder": "Название мероприятия",
+        "category": "Категория *",
+        "categoryPlaceholder": "Выберите категорию...",
+        "venueType": "Тип площадки *",
+        "venue": "Площадка *",
+        "venuePlaceholder": "Выберите площадку...",
+        "date": "Дата и время *",
+        "minPrice": "Мин. цена ₸ *",
+        "maxPrice": "Макс. цена ₸",
+        "duration": "Длительность (мин)",
+        "shortDesc": "Краткое описание",
+        "shortDescPlaceholder": "Одна строка для карточки события",
+        "description": "Полное описание *",
+        "descriptionPlaceholder": "Подробное описание мероприятия...",
+        "tags": "Теги (через запятую)",
+        "tagsPlaceholder": "концерт, рок, алматы",
+        "poster": "URL постера (обложка карточки)",
+        "posterPlaceholder": "https://images.unsplash.com/...",
+        "banner": "URL баннера (фон страницы события)",
+        "bannerPlaceholder": "https://images.unsplash.com/...",
+        "status": "Статус публикации",
+        "ageLimit": "Возрастное ограничение",
+        "noLimit": "Без ограничений",
+        "featured": "Топ событие",
+        "featuredDesc": "Показывается в разделе «Рекомендуем»",
+        "hot": "Горячий билет",
+        "hotDesc": "Показывается в разделе «Раскупают прямо сейчас»"
+      },
+      "save": "💾 Сохранить изменения",
+      "create": "✅ Создать мероприятие",
+      "cancel": "Отмена",
+      "deleteConfirm": "Удалить мероприятие? Это действие необратимо.",
+      "deleted": "Удалено",
+      "deleteError": "Ошибка удаления",
+      "saveError": "Ошибка сохранения",
+      "loadError": "Ошибка загрузки",
+      "updated": "✅ Мероприятие обновлено",
+      "created": "✅ Мероприятие создано"
+    },
+    "users": {
+      "title": "Пользователи",
+      "searchPlaceholder": "Поиск по имени или email...",
+      "columns": {
+        "user": "Пользователь",
+        "role": "Роль",
+        "registered": "Зарегистрирован",
+        "actions": "Действия"
+      },
+      "makeAdmin": "Сделать админом",
+      "makeUser": "Сделать пользователем"
+    },
+    "orders": {
+      "title": "Заказы",
+      "columns": {
+        "id": "ID",
+        "client": "Клиент",
+        "event": "Событие",
+        "tickets": "Билетов",
+        "amount": "Сумма",
+        "status": "Статус",
+        "date": "Дата"
+      }
+    },
+    "nav": {
+      "dashboard": "Дашборд",
+      "events": "Мероприятия",
+      "users": "Пользователи",
+      "orders": "Заказы",
+      "backToSite": "На сайт"
+    }
+  },
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "view": "Просмотр",
+    "close": "Закрыть",
+    "back": "Назад",
+    "next": "Далее",
+    "dateUnknown": "Дата уточняется",
+    "kazakhstan": "Казахстан",
+    "seats": "мест",
+    "place": "Место {{number}}",
+    "row": "Ряд {{row}}"
+  },
+  "footer": {
+    "description": "Платформа для покупки билетов на лучшие события Казахстана",
+    "events": "События",
+    "poster": "Афиша",
+    "categories": "Категории",
+    "hot": "Горячие билеты",
+    "top": "Топ события",
+    "company": "Компания",
+    "about": "О нас",
+    "contacts": "Контакты",
+    "faq": "FAQ",
+    "support": "Поддержка",
+    "rights": "© {{year}} TicketHub. Все права защищены.",
+    "madeIn": "Сделано в Казахстане 🇰🇿"
+  },
+  "notFound": {
+    "title": "Страница не найдена",
+    "subtitle": "Возможно, она была удалена или перемещена",
+    "home": "На главную"
+  }
+}

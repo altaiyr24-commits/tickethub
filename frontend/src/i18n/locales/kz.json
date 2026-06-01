@@ -1,0 +1,356 @@
+{
+  "nav": {
+    "poster": "Афиша",
+    "categories": "Санаттар",
+    "hot": "Ыстық",
+    "top": "Үздік",
+    "login": "Кіру",
+    "register": "Тіркелу",
+    "profile": "Профиль",
+    "myTickets": "Менің билеттерім",
+    "favorites": "Таңдаулылар",
+    "adminPanel": "Әкімші панелі",
+    "logout": "Шығу",
+    "search": "Іздеу...",
+    "categories_list": {
+      "concerts": "Концерттер",
+      "theatre": "Театр",
+      "sport": "Спорт",
+      "standup": "Стендап",
+      "exhibition": "Көрмелер",
+      "cinema": "Кино"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "Қазақстандағы №1 платформа",
+      "title": "Үздік іс-шараларға",
+      "titleHighlight": "билеттер",
+      "subtitle": "Концерттер, театр, спорт, кино — бәрі бір жерде. Билеттерді онлайн секундтарда сатып алыңыз.",
+      "browsePoster": "Афишаны қарау",
+      "hotTickets": "Ыстық билеттер",
+      "stats": {
+        "events": "іс-шара",
+        "cities": "қала",
+        "tickets": "билет сатылды",
+        "rating": "рейтинг"
+      }
+    },
+    "featured": {
+      "title": "Ұсынамыз",
+      "subtitle": "Осы маусымның үздік іс-шаралары"
+    },
+    "hot": {
+      "title": "Қазір сатып алынуда",
+      "subtitle": "Асығыңыз — орындар аз қалды"
+    },
+    "stats": {
+      "title": "TicketHub сандарда",
+      "events": "Іс-шаралар",
+      "cities": "Қалалар",
+      "tickets": "Билет сатылды",
+      "users": "Пайдаланушылар"
+    },
+    "newsletter": {
+      "title": "Бірде-бір іс-шараны жіберіп алма",
+      "subtitle": "Жазылып, жаңа іс-шаралар туралы бірінші болып хабар алыңыз",
+      "placeholder": "Сіздің email",
+      "button": "Жазылу",
+      "success": "Жазылдыңыз!"
+    },
+    "categories": {
+      "title": "Санаттар",
+      "subtitle": "Өзіңізге ұнайтын іс-шараны табыңыз"
+    }
+  },
+  "events": {
+    "title": "Іс-шаралар афишасы",
+    "loading": "Жүктелуде...",
+    "total": "{{count}} іс-шара",
+    "filters": "{{count}} сүзгі",
+    "notFound": "Ештеңе табылмады",
+    "notFoundSub": "Сүзгілерді немесе іздеу сұрауын өзгертіп көріңіз",
+    "resetFilters": "Сүзгілерді тазалау",
+    "all": "Барлығы",
+    "searchPlaceholder": "Іс-шаралар, орындаушылар, командаларды іздеу...",
+    "sort": {
+      "date": "📅 Күні бойынша",
+      "popular": "🔥 Танымалдылығы бойынша",
+      "price": "💰 Бағасы бойынша"
+    },
+    "from": "бастап",
+    "buy": "Сатып алу",
+    "seatsLeft": "{{count}} орын қалды",
+    "soldPercent": "{{percent}}% сатылды",
+    "almostSoldOut": "🔥 Орындар аз қалды — {{count}} ғана"
+  },
+  "eventDetail": {
+    "dateTime": "Күні мен уақыты",
+    "venue": "Орны",
+    "duration": "Ұзақтығы",
+    "durationValue": "{{min}} мин",
+    "durationUnknown": "Нақтыланады",
+    "countdown": "Іс-шара басталғанға дейін",
+    "about": "Іс-шара туралы",
+    "sessions": "Бүгінгі сеанстар",
+    "formats": "Көрсету форматтары",
+    "noSeats": "Орын жоқ",
+    "selectedSession": "Таңдалған сеанс",
+    "selectSession": "Сол жақтан сеанс таңдаңыз",
+    "buyTicket": "Билет сатып алу",
+    "selectSeats": "Орын таңдау",
+    "seatsLeft": "Орын қалды",
+    "almostSoldOut": "🔥 Орындар аз қалды!",
+    "safePayment": "🔒 Қауіпсіз төлем · Жедел жеткізу",
+    "venueInfo": "Алаң",
+    "shareLink": "🔗 Сілтеме көшірілді",
+    "addedFav": "❤️ Таңдаулыларға қосылды",
+    "removedFav": "Таңдаулылардан жойылды",
+    "notFound": "Іс-шара табылмады",
+    "notFoundSub": "Мүмкін ол жойылған немесе жылжытылған",
+    "backToPoster": "Афишаға",
+    "loading": "Іс-шара жүктелуде...",
+    "chooseSession": "🎬 Орын таңдау",
+    "standard": "Стандарт",
+    "vip": "VIP"
+  },
+  "seats": {
+    "title": "Билеттер — {{event}}",
+    "tickets": "Билеттер",
+    "schemeTitle": "Зал схемасы",
+    "schemeHint": "Басу — таңдау · Доңғалақ — масштаб · Сүйреу — жылжыту",
+    "noScheme": "Зал схемасы орнатылмаған",
+    "selectedSeats": "Таңдалған орындар",
+    "clickSeat": "Орынды басыңыз",
+    "maxSeats": "Макс. 10 орын",
+    "maxSeatsError": "Максимум 10 орын",
+    "seatAdded": "{{row}}{{number}} орны қосылды",
+    "toPayment": "Төлемге",
+    "clearSelection": "Таңдауды тазалау",
+    "prices": "Бағалар",
+    "standard": "Стандарт",
+    "premium": "Премиум",
+    "vip": "VIP",
+    "timeWarning": "Таңдаудан кейін төлемге <b>10 минут</b> бар",
+    "selectTickets": "Билеттерді таңдаңыз",
+    "available": "{{count}} қол жетімді",
+    "toCheckout": "Төлемге өту",
+    "instantDelivery": "Email-ге жедел жеткізу",
+    "safePayment": "Қауіпсіз SSL төлем",
+    "qrCode": "Кіру үшін QR-код",
+    "selectAtLeastOne": "Кем дегенде бір билет таңдаңыз",
+    "selectAtLeastOneSeat": "Кем дегенде бір орын таңдаңыз"
+  },
+  "checkout": {
+    "title": "Тапсырысты рәсімдеу",
+    "back": "Артқа",
+    "timeLeft": "Орындар брондалды. Қалды: {{time}}",
+    "paymentMethod": "Төлем тәсілі",
+    "card": "Карта",
+    "kaspiPay": "Kaspi Pay",
+    "qrCode": "QR-код",
+    "cardData": "Карта деректері",
+    "flip": "Аудару",
+    "random": "🎲 Кездейсоқ",
+    "cardNumber": "Карта нөмірі",
+    "expiry": "Жарамдылық мерзімі",
+    "cvv": "CVV",
+    "cardName": "Картадағы аты",
+    "demoMode": "Демо-режим: карта автоматты түрде жасалды",
+    "kaspiScan": "Kaspi.kz қосымшасында QR-кодты сканерлеңіз",
+    "qrScan": "Кез келген банктік қосымшамен кодты сканерлеңіз",
+    "emailNotice": "Билеттер email-ге жіберіледі",
+    "pay": "Төлеу {{amount}}",
+    "sslNotice": "Қауіпсіз SSL қосылым",
+    "yourOrder": "Сіздің тапсырысыңыз",
+    "serviceFee": "Қызмет ақысы",
+    "included": "Қосылған",
+    "total": "Барлығы",
+    "emailDelivery": "Билеттер төлемнен кейін бірден email-ге жіберіледі",
+    "processing": "Төлем өңделуде...",
+    "dontClose": "Бетті жаппаңыз",
+    "timeExpired": "Уақыт бітті",
+    "row": "Қатар {{row}}, Орын {{number}}",
+    "seat": "{{row}}"
+  },
+  "orderSuccess": {
+    "title": "Тапсырыс рәсімделді",
+    "paid": "Төлем өтті!",
+    "emailSent": "Билеттер email-ге жіберілді",
+    "myTickets": "Менің билеттерім",
+    "share": "Бөлісу",
+    "home": "Басты бетке",
+    "linkCopied": "Сілтеме көшірілді",
+    "total": "Барлығы",
+    "row": "Қатар {{row}}, Орын {{number}}",
+    "ticket": "Билет {{number}}",
+    "showQr": "Кіруде QR-кодты көрсетіңіз"
+  },
+  "orders": {
+    "title": "Менің билеттерім",
+    "empty": "Билет жоқ",
+    "emptySub": "Жақын іс-шараларға билет сатып алыңыз",
+    "toPoster": "Афишаға",
+    "status": {
+      "CONFIRMED": "Төленді",
+      "PENDING": "Күту",
+      "CANCELLED": "Бас тартылды"
+    },
+    "tickets": "{{count}} билет",
+    "orderDetails": "Тапсырыс мәліметтері",
+    "total": "Барлығы",
+    "row": "Қатар {{row}}, Орын {{number}}",
+    "ticket": "Билет {{number}}"
+  },
+  "favorites": {
+    "title": "Таңдаулылар",
+    "empty": "Таңдаулылар жоқ",
+    "emptySub": "Іс-шараларды таңдаулыларға қосыңыз",
+    "toPoster": "Афишаға"
+  },
+  "auth": {
+    "login": {
+      "title": "Қош келдіңіз",
+      "subtitle": "Аккаунтыңызға кіріңіз",
+      "email": "Email",
+      "password": "Құпия сөз",
+      "forgotPassword": "Құпия сөзді ұмыттыңыз ба?",
+      "submit": "Кіру",
+      "noAccount": "Аккаунт жоқ па?",
+      "registerLink": "Тіркелу",
+      "demo": "Демо аккаунттар",
+      "loading": "Жүктелуде..."
+    },
+    "register": {
+      "title": "Аккаунт жасау",
+      "subtitle": "TicketHub-қа қосылыңыз",
+      "name": "Аты",
+      "namePlaceholder": "Сіздің атыңыз",
+      "email": "Email",
+      "password": "Құпия сөз",
+      "passwordPlaceholder": "Кемінде 6 таңба",
+      "confirm": "Құпия сөзді растаңыз",
+      "confirmPlaceholder": "Құпия сөзді қайталаңыз",
+      "submit": "Тіркелу",
+      "hasAccount": "Аккаунт бар ма?",
+      "loginLink": "Кіру",
+      "errors": {
+        "nameMin": "Кемінде 2 таңба",
+        "emailInvalid": "Қате email",
+        "passwordMin": "Кемінде 6 таңба",
+        "passwordMatch": "Құпия сөздер сәйкес келмейді"
+      }
+    }
+  },
+  "profile": {
+    "title": "Менің профилім",
+    "data": "Деректер",
+    "security": "Қауіпсіздік",
+    "name": "Аты",
+    "namePlaceholder": "Сіздің атыңыз",
+    "email": "Email",
+    "phone": "Телефон",
+    "phonePlaceholder": "+7 (777) 000-00-00",
+    "save": "Сақтау",
+    "saving": "Сақталуда...",
+    "saved": "Профиль жаңартылды",
+    "saveError": "Сақтау қатесі",
+    "currentPassword": "Ағымдағы құпия сөз",
+    "newPassword": "Жаңа құпия сөз",
+    "confirmPassword": "Құпия сөзді растаңыз",
+    "changePassword": "Құпия сөзді өзгерту",
+    "passwordChanged": "Құпия сөз өзгертілді",
+    "passwordMismatch": "Құпия сөздер сәйкес келмейді",
+    "roles": {
+      "ADMIN": "👑 Әкімші",
+      "USER": "👤 Пайдаланушы"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Басқару тақтасы",
+      "subtitle": "TicketHub платформасына шолу",
+      "users": "Пайдаланушылар",
+      "events": "Іс-шаралар",
+      "orders": "Тапсырыстар",
+      "revenue": "Табыс",
+      "recentOrders": "Соңғы тапсырыстар",
+      "topEvents": "Үздік іс-шаралар"
+    },
+    "events": {
+      "title": "Іс-шаралар",
+      "subtitle": "Базада {{count}} іс-шара",
+      "add": "Қосу",
+      "searchPlaceholder": "Атауы немесе алаң бойынша іздеу...",
+      "columns": {
+        "event": "Іс-шара",
+        "category": "Санат",
+        "date": "Күні",
+        "price": "Бағасы",
+        "status": "Мәртебесі",
+        "actions": "Әрекеттер"
+      },
+      "noEvents": "Іс-шаралар жоқ",
+      "save": "💾 Өзгерістерді сақтау",
+      "create": "✅ Іс-шара жасау",
+      "cancel": "Бас тарту",
+      "deleteConfirm": "Іс-шараны жою? Бұл әрекетті қайтару мүмкін емес.",
+      "deleted": "Жойылды",
+      "updated": "✅ Іс-шара жаңартылды",
+      "created": "✅ Іс-шара жасалды"
+    },
+    "users": {
+      "title": "Пайдаланушылар",
+      "searchPlaceholder": "Аты немесе email бойынша іздеу...",
+      "makeAdmin": "Әкімші ету",
+      "makeUser": "Пайдаланушы ету"
+    },
+    "orders": {
+      "title": "Тапсырыстар"
+    },
+    "nav": {
+      "dashboard": "Басқару тақтасы",
+      "events": "Іс-шаралар",
+      "users": "Пайдаланушылар",
+      "orders": "Тапсырыстар",
+      "backToSite": "Сайтқа"
+    }
+  },
+  "common": {
+    "loading": "Жүктелуде...",
+    "error": "Қате",
+    "save": "Сақтау",
+    "cancel": "Бас тарту",
+    "delete": "Жою",
+    "edit": "Өңдеу",
+    "view": "Қарау",
+    "close": "Жабу",
+    "back": "Артқа",
+    "next": "Келесі",
+    "dateUnknown": "Күні нақтыланады",
+    "kazakhstan": "Қазақстан",
+    "seats": "орын",
+    "place": "Орын {{number}}",
+    "row": "Қатар {{row}}"
+  },
+  "footer": {
+    "description": "Қазақстандағы үздік іс-шараларға билет сатып алу платформасы",
+    "events": "Іс-шаралар",
+    "poster": "Афиша",
+    "categories": "Санаттар",
+    "hot": "Ыстық билеттер",
+    "top": "Үздік іс-шаралар",
+    "company": "Компания",
+    "about": "Біз туралы",
+    "contacts": "Байланыс",
+    "faq": "FAQ",
+    "support": "Қолдау",
+    "rights": "© {{year}} TicketHub. Барлық құқықтар қорғалған.",
+    "madeIn": "Қазақстанда жасалған 🇰🇿"
+  },
+  "notFound": {
+    "title": "Бет табылмады",
+    "subtitle": "Мүмкін ол жойылған немесе жылжытылған",
+    "home": "Басты бетке"
+  }
+}
